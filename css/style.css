@@ -617,7 +617,6 @@ body::before {
 
 /* Mobile – max-width 480px */
 @media (max-width: 480px) {
-  /* Roadmap Section */
   .roadmap-container {
     padding: 0 10px;
   }
