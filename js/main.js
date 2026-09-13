@@ -7,27 +7,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-const progressBars = document.querySelectorAll('.progress-bar');
-
-const startProgressAnimation = () => {
-  progressBars.forEach(bar => {
-    const width = bar.getAttribute('data-width');
-    bar.style.width = width + '%';
-  });
-};
-
-const skillsSection = document.getElementById('skills');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      startProgressAnimation();
-      observer.unobserve(entry.target); 
-    }
-  });
-}, { threshold: 0.5 });
-
-observer.observe(skillsSection);
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -46,15 +25,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-
-const roadmapItems = document.querySelectorAll('.timeline-item-modern');
-
 const roadmapObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.querySelectorAll('.timeline-item-modern').forEach((item, i) => {
+      document.querySelectorAll('.timeline-item-modern').forEach((item, i) => {
         setTimeout(() => item.classList.add('show'), i * 300);
       });
+      roadmapObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.2 });
